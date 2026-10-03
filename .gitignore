@@ -1,3 +1,18 @@
+.env
+.env.local
+__pycache__/
+*.pyc
+venv/
+.venv/
+node_modules/
+.next/
+dist/
+build/
+.DS_Store
+*.pkl
+*.joblib
+ml/data/raw/
+
 # Logs
 logs
 *.log
