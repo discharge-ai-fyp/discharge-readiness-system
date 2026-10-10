@@ -1,0 +1,76 @@
+{
+  "global_importance": {
+    "age_mid": 0.6162999868392944,
+    "num_medications": 0.24140000343322754,
+    "number_diagnoses": 0.17980000376701355,
+    "payer_code_MC": 0.10589999705553055,
+    "diag_1_injury": 0.1031000018119812,
+    "num_procedures": 0.08429999649524689,
+    "diag_2_other": 0.08299999684095383,
+    "num_lab_procedures": 0.07890000194311142,
+    "diag_1_digestive": 0.07620000094175339,
+    "admission_source_id_1": 0.07429999858140945,
+    "diag_3_other": 0.0737999975681305,
+    "diag_1_respiratory": 0.07270000129938126,
+    "diag_1_musculoskeletal": 0.065700002014637,
+    "number_inpatient": 0.04540000110864639,
+    "max_glu_serum_Not_measured": 0.04450000077486038,
+    "medical_specialty_Emergency/Trauma": 0.04439999908208847,
+    "medical_specialty_Cardiology": 0.04399999976158142,
+    "admission_source_id_5": 0.04340000078082085,
+    "admission_type_id_5": 0.0357000008225441,
+    "gender_Male": 0.030899999663233757
+  },
+  "examples": {
+    "highest_risk": {
+      "p": 0.915,
+      "factors": [
+        {
+          "feature": "admission_source_id_5",
+          "shap": 2.504
+        },
+        {
+          "feature": "age_mid",
+          "shap": 1.055
+        },
+        {
+          "feature": "diag_1_respiratory",
+          "shap": -0.203
+        },
+        {
+          "feature": "number_diagnoses",
+          "shap": 0.132
+        },
+        {
+          "feature": "diag_2_other",
+          "shap": 0.102
+        }
+      ]
+    },
+    "lowest_risk": {
+      "p": 0.011,
+      "factors": [
+        {
+          "feature": "age_mid",
+          "shap": -1.404
+        },
+        {
+          "feature": "number_diagnoses",
+          "shap": -0.501
+        },
+        {
+          "feature": "num_medications",
+          "shap": -0.474
+        },
+        {
+          "feature": "medical_specialty_ObstetricsandGynecology",
+          "shap": -0.39
+        },
+        {
+          "feature": "admission_source_id_1",
+          "shap": -0.161
+        }
+      ]
+    }
+  }
+}
