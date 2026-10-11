@@ -162,3 +162,7 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+.ipynb_checkpoints/
+ml/data/processed/
+ml/venv312/

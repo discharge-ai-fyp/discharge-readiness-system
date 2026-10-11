@@ -1,0 +1,132 @@
+{
+  "calibration": [
+    {
+      "decile": 0,
+      "mean_pred": 0.04800000041723251,
+      "observed": 0.045,
+      "n": 1981
+    },
+    {
+      "decile": 1,
+      "mean_pred": 0.06400000303983688,
+      "observed": 0.066,
+      "n": 1980
+    },
+    {
+      "decile": 2,
+      "mean_pred": 0.07599999755620956,
+      "observed": 0.069,
+      "n": 1980
+    },
+    {
+      "decile": 3,
+      "mean_pred": 0.0860000029206276,
+      "observed": 0.085,
+      "n": 1980
+    },
+    {
+      "decile": 4,
+      "mean_pred": 0.09600000083446503,
+      "observed": 0.093,
+      "n": 1980
+    },
+    {
+      "decile": 5,
+      "mean_pred": 0.10599999874830246,
+      "observed": 0.098,
+      "n": 1980
+    },
+    {
+      "decile": 6,
+      "mean_pred": 0.11900000274181366,
+      "observed": 0.12,
+      "n": 1980
+    },
+    {
+      "decile": 7,
+      "mean_pred": 0.1340000033378601,
+      "observed": 0.146,
+      "n": 1980
+    },
+    {
+      "decile": 8,
+      "mean_pred": 0.16200000047683716,
+      "observed": 0.151,
+      "n": 1980
+    },
+    {
+      "decile": 9,
+      "mean_pred": 0.25200000405311584,
+      "observed": 0.246,
+      "n": 1981
+    }
+  ],
+  "operating_points": [
+    {
+      "flag_top": 0.1,
+      "precision": 0.246,
+      "recall": 0.22,
+      "lift": 2.2
+    },
+    {
+      "flag_top": 0.2,
+      "precision": 0.198,
+      "recall": 0.355,
+      "lift": 1.77
+    },
+    {
+      "flag_top": 0.3,
+      "precision": 0.181,
+      "recall": 0.486,
+      "lift": 1.62
+    }
+  ],
+  "subgroup_auc": {
+    "gender": {
+      "Female": {
+        "n": 10645,
+        "auc": 0.652
+      },
+      "Male": {
+        "n": 9157,
+        "auc": 0.645
+      }
+    },
+    "race": {
+      "AfricanAmerican": {
+        "n": 3707,
+        "auc": 0.643
+      },
+      "Caucasian": {
+        "n": 14886,
+        "auc": 0.648
+      },
+      "Hispanic": {
+        "n": 371,
+        "auc": 0.719
+      },
+      "Not_measured": {
+        "n": 418,
+        "auc": 0.546
+      }
+    },
+    "age_band": {
+      "(0, 40]": {
+        "n": 1284,
+        "auc": 0.766
+      },
+      "(40, 60]": {
+        "n": 5378,
+        "auc": 0.667
+      },
+      "(60, 80]": {
+        "n": 9306,
+        "auc": 0.634
+      },
+      "(80, 100]": {
+        "n": 3834,
+        "auc": 0.6
+      }
+    }
+  }
+}
