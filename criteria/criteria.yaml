@@ -1,0 +1,139 @@
+version: "0.2"
+status: draft
+disclaimer: "Decision-support only. Not a validated clinical tool. The treating physician makes the final decision."
+
+sources:
+  halm: &halm "Halm et al. 2002, Arch Intern Med 162(11):1278-84, Methods (stability definition)"
+  ada_a1c: &ada_a1c "ADA Standards of Care in Diabetes 2026, Sec. 16, Rec. 16.1 (grade B); 2025: Rec. 16.1"
+  ada_plan: &ada_plan "ADA Standards of Care in Diabetes 2026, Sec. 16, Rec. 16.18 (grade B); 2025: Rec. 16.16"
+  ada_meds: &ada_meds "ADA 2026 Sec. 16, Transition (AHRQ minimum discharge plan); AHRQ RED Toolkit, Tool 3, Table 1, component 5"
+  ada_fu: &ada_fu "ADA 2026 Sec. 16, Transition; AHRQ RED Toolkit, Tool 3, Table 1, component 2"
+  ada_pend: &ada_pend "ADA 2026 Sec. 16, Transition; AHRQ RED Toolkit, Tool 3, Table 1, component 3"
+  red_svc: &red_svc "AHRQ RED Toolkit, Tool 3, Table 1, component 4"
+
+groups:
+  stability:
+    label: "Clinical stability (Halm, 7 factors, last 24 h before discharge)"
+    note: "From a pneumonia cohort. There, 10.5% / 13.7% / 46.2% of patients with 0 / 1 / 2 or more unstable factors died or were readmitted within 30 days. Having none does not rule out risk (sensitivity of 1+ factors was 27.5%). The authors suggest close follow-up for 1 factor and usually continued stay for 2 or more; the physician decides."
+  diabetes:
+    label: "Diabetes care in hospital"
+    note: ""
+  transition:
+    label: "Discharge planning and transition"
+    note: ""
+
+criteria:
+  - id: C1
+    group: stability
+    label: "Temperature stable"
+    unit: "C"
+    source: *halm
+    input: clinician
+    field: temperature_c
+    rule: {type: max, value: 37.8}
+    severity: priority
+  - id: C2
+    group: stability
+    label: "Heart rate stable"
+    unit: "/min"
+    source: *halm
+    input: clinician
+    field: heart_rate
+    rule: {type: max, value: 100}
+    severity: priority
+  - id: C3
+    group: stability
+    label: "Respiratory rate stable"
+    unit: "/min"
+    source: *halm
+    input: clinician
+    field: resp_rate
+    rule: {type: max, value: 24}
+    severity: priority
+  - id: C4
+    group: stability
+    label: "Systolic blood pressure adequate"
+    unit: "mmHg"
+    source: *halm
+    input: clinician
+    field: systolic_bp
+    rule: {type: min, value: 90}
+    severity: priority
+  - id: C5
+    group: stability
+    label: "Oxygen saturation adequate"
+    unit: "%"
+    source: *halm
+    input: clinician
+    field: spo2
+    rule: {type: min, value: 90}
+    severity: priority
+    note: "Checks the SpO2 >= 90% cutoff only. Halm: nasal-prong oxygen needs >= 95%; baseline home-oxygen users are not counted unstable. Clinician applies these exceptions."
+  - id: C6
+    group: stability
+    label: "Able to maintain oral intake"
+    source: *halm
+    input: clinician
+    field: oral_intake_ok
+    rule: {type: bool}
+    severity: priority
+    note: "Halm: able to eat, or long-term tube feeding resumed."
+  - id: C7
+    group: stability
+    label: "Mental status normal or at baseline"
+    source: *halm
+    input: clinician
+    field: mental_status_normal
+    rule: {type: bool}
+    severity: priority
+    note: "Halm: normal, or back to baseline for chronic dementia."
+  - id: C8
+    group: diabetes
+    label: "A1C result available"
+    source: *ada_a1c
+    input: data
+    field: a1c_result
+    rule: {type: in_set, pass_values: [">8", ">7", "Norm"]}
+    severity: advisory
+    note: "Missing or not measured stays unknown: ADA asks for a result from the prior 3 months, which this dataset cannot show."
+  - id: C9
+    group: transition
+    label: "Structured discharge plan documented"
+    source: *ada_plan
+    input: clinician
+    field: discharge_plan_documented
+    rule: {type: bool}
+    severity: priority
+  - id: C10
+    group: transition
+    label: "Medication reconciliation done"
+    source: *ada_meds
+    input: clinician
+    field: med_reconciliation_done
+    rule: {type: bool}
+    severity: priority
+  - id: C11
+    group: transition
+    label: "Follow-up appointment scheduled before discharge"
+    source: *ada_fu
+    input: clinician
+    field: followup_scheduled
+    rule: {type: bool}
+    severity: priority
+    note: "ADA: visit within 1 month after in-hospital hyper/hypoglycemia; 1-2 weeks if glycemic medications changed or control not optimal."
+  - id: C12
+    group: transition
+    label: "Plan for results pending at discharge"
+    source: *ada_pend
+    input: clinician
+    field: pending_tests_plan
+    rule: {type: bool}
+    severity: advisory
+  - id: C13
+    group: transition
+    label: "Post-discharge services and equipment arranged"
+    source: *red_svc
+    input: clinician
+    field: services_equipment_arranged
+    rule: {type: bool}
+    severity: advisory
