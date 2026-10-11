@@ -165,3 +165,4 @@ vite.config.ts.timestamp-*
 
 .ipynb_checkpoints/
 ml/data/processed/
+ml/venv312/
