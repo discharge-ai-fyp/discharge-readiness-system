@@ -11,7 +11,10 @@ build/
 .DS_Store
 *.pkl
 *.joblib
+*.features.json
+*.metadata.json
 ml/data/raw/
+backend/audit.db
 
 # Logs
 logs
