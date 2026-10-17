@@ -11,7 +11,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from xgboost import XGBClassifier
 
-from src.data import make_dataset
+from src.data import RAW, make_dataset
+from src.inference import write_artifacts
 
 SEED = 42
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,8 +58,19 @@ def main(target, model_name):
     }
     (ROOT / "models").mkdir(exist_ok=True)
     (ROOT / "reports").mkdir(exist_ok=True)
-    joblib.dump(pipe, ROOT / "models" / f"{target}_{model_name}.joblib")
+    model_path = ROOT / "models" / f"{target}_{model_name}.joblib"
+    joblib.dump(pipe, model_path)
     (ROOT / "reports" / f"{target}_{model_name}_metrics.json").write_text(json.dumps(metrics, indent=2))
+    spec_path, meta_path = write_artifacts(
+        model_path,
+        X,
+        p,
+        target=target,
+        model_name=model_name,
+        metrics=metrics,
+        raw_data_path=RAW,
+    )
+    print(f"wrote {spec_path.name} and {meta_path.name}")
     print({k: (round(v, 3) if isinstance(v, float) else v) for k, v in metrics.items() if k != "features"})
 
 

@@ -1,0 +1,20 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - backend/.env
+    environment:
+      DISCHARGE_MODEL_PATH: /models/facility_xgb.joblib
+      DISCHARGE_FEATURE_SPEC_PATH: /models/facility_xgb.features.json
+      DISCHARGE_MODEL_METADATA_PATH: /models/facility_xgb.metadata.json
+      DISCHARGE_AUDIT_DB_PATH: /runtime/audit.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml/models:/models:ro
+      - api-runtime:/runtime
+
+volumes:
+  api-runtime:
